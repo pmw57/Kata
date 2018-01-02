@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FooBarQix Kata</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1><a href="http://codingdojo.org/kata/FooBarQix/">FooBarQix Kata</a> - 2018-01-02</h1>
+<h2>Rules</h2>
+<ul><li>If the number is divisible by 3, write “Foo” instead of the number</li>
+    <li>If the number is divisible by 5, add “Bar”</li>
+    <li>If the number is divisible by 7, add “Qix”</li>
+    <li>For each digit 3, 5, 7, add “Foo”, “Bar”, “Qix” in the digits order.</li>
+    <li>Keep track of every 0 in the numbers, replacing them with an asterisk “*“ character.</li>
+</ul>
+<ul class="results"></ul>
+<script src="foobarqix.js"></script>
+<script src="foobarqix.test.js"></script>
+<script>
+var results = document.querySelector(".results");
+var lis = document.createDocumentFragment();
+for (let i = 1; i <= 1000; i += 1) {
+    const value = foobarqix(String(i));
+    const li = document.createElement("li");
+    const text = document.createTextNode(value);
+    li.appendChild(text);
+    results.appendChild(li);
+}
+</script>
+</body>
+</html>
