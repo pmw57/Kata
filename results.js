@@ -1,4 +1,4 @@
-/*jslint browser*/ /*global window*/
+/*jslint browser es6*/ /*global window*/
 window.results = (function iife() {
     "use strict";
     function itemsReducer(items, value) {
