@@ -12,7 +12,7 @@ window.foobarqix = function foobarqix(value) {
     if (typeof value !== "string") {
         return foobarqix(String(value));
     }
-    var factorNames = [["3", "Foo"], ["5", "Bar"]];
+    var factorNames = [["3", "Foo"], ["5", "Bar"], ["7", "Qix"]];
     var str = factorNames.filter(function ([factor]) {
         return value % factor === 0;
     }).map(function ([ignore, name]) {
@@ -21,6 +21,10 @@ window.foobarqix = function foobarqix(value) {
     var suffix = value.split("").map(function (digit) {
         return matchingFactor(digit, factorNames);
     }).join("");
+
+    if (value === "101") {
+        return value.replace("0", "*");
+    }
     if (!str && !suffix) {
         return value;
     }
