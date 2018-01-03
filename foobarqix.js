@@ -6,27 +6,32 @@ window.foobarqix = function foobarqix(value) {
             return factor === digit;
         }).map(function ([ignore, name]) {
             return name;
-        });
+        }).join("");
+    }
+    function matchingFactorIterator(factorNames) {
+        return function (value) {
+            return matchingFactor(value, factorNames);
+        };
     }
 
     if (typeof value !== "string") {
         return foobarqix(String(value));
     }
-    var factorNames = [["3", "Foo"], ["5", "Bar"], ["7", "Qix"]];
+    var factorNames = [
+        ["3", "Foo"], ["5", "Bar"], ["7", "Qix"], ["0", "*"]
+    ];
     var str = factorNames.filter(function ([factor]) {
         return value % factor === 0;
     }).map(function ([ignore, name]) {
         return name;
     }).join("");
-    var suffix = value.split("").map(function (digit) {
-        return matchingFactor(digit, factorNames);
-    }).join("");
-
-    if (value === "101") {
-        return value.replace("0", "*");
+    var matchingFactorIter = matchingFactorIterator(factorNames);
+    var suffix = value.split("")
+        .map(matchingFactorIter)
+        .join("");
+    var valueStar = value.replace("0", "*");
+    if (str || valueStar.split("").find(matchingFactorIter)) {
+        return str + suffix;
     }
-    if (!str && !suffix) {
-        return value;
-    }
-    return str + suffix;
+    return valueStar;
 };
